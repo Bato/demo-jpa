@@ -10,4 +10,6 @@ import eu.mh.jpa.domain.Standard;
 public interface ElementCollectionExampleRepository extends JpaRepository<Standard, Long> {
 	
 	Page<Standard> findAll(Pageable pageable) ;
+	
+	public Standard findByName(String name);
 }

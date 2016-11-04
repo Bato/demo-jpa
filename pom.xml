@@ -42,17 +42,24 @@
 		</dependency>	
 
         <!--  DBs drivers -->
+        
+        <!-- H2 DB
+             https://springframework.guru/using-the-h2-database-console-in-spring-boot-with-spring-security/ 
+          -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 	
+		<!-- HyperSQL DB 	 -->        
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<!-- MySQL DB 	 -->        
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -63,7 +70,13 @@
             <artifactId>postgresql</artifactId>
 			<scope>runtime</scope>            
         </dependency>
-        		  		
+
+		<!-- Derby DB -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+		</dependency>
+		        		  		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -82,6 +95,7 @@
 						<profile>mysql</profile>
 						<profile>hsql</profile>
 						<profile>postgresql</profile>
+						<profile>derby</profile>
 					</profiles>
 				</configuration>         				
 			</plugin>

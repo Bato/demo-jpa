@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -22,44 +24,53 @@ import eu.mh.jpa.repos.ElementCollectionExampleRepository;
 @Transactional
 class DummyDataCLR implements CommandLineRunner {
 
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private ElementCollectionExampleRepository repository;
 
 	@Override
 	public void run(String... arg0) throws Exception {
+		
+		logger.info("*** Imorting DEMO Data in database ...");		
 
 		if (repository.count() > 0) return;
 		
-		Standard norm = new Standard();
-		norm.setName("std-1");
-		norm.setInstitution("DIN");
-		norm.setReleased("2016-11-00");
-		Map<String, String> languages = new HashMap<String, String>();
-		languages.put("de", "deutsch 1");
-		languages.put("en", "english 1");
-		languages.put("fr", "france 1");
-		Map<String, String> abstracts = new HashMap<String, String>();
-		abstracts.put("de", "abstract de 1");
-		abstracts.put("en", "abstract en 1");
-		abstracts.put("fr", "abstract fr 1");
-		norm.setTitles(languages);
-		norm.setAbstracts(abstracts);
-		repository.save(norm);
+		Map<String, String> langTitles1 = new HashMap<String, String>();
+		langTitles1.put("de", "title deutsch 1");
+		langTitles1.put("en", "title english 1");		
+		langTitles1.put("fr", "title france 1");
 
-		norm = new Standard();
-		norm.setName("std-2");
-		norm.setInstitution("DIN");
-		norm.setReleased("2015-11-00");
-		languages = new HashMap<String, String>();
-		languages.put("de", "deutsch 2");
-		languages.put("en", "english 2");
-		languages.put("fr", "france 2");
-		abstracts = new HashMap<String, String>();
-		abstracts.put("de", "abstract de 2");
-		abstracts.put("en", "abstract en 2");
-		norm.setTitles(languages);
-		norm.setAbstracts(abstracts);
-		repository.save(norm);
+		Map<String, String> langTitles2  = new HashMap<String, String>();
+		langTitles2.put("de", "title de 2");
+		langTitles2.put("en", "title en 2");		
+		langTitles2.put("fr", "title fr 2");	
+
+		Map<String, String> langAbstracts1 = new HashMap<String, String>();
+		langAbstracts1.put("de", "abstract de 1");
+		langAbstracts1.put("en", "abstract en 1");
+		langAbstracts1.put("fr", "abstract fr 1");
+
+		Map<String, String> langAbstracts2 = new HashMap<String, String>();
+		langAbstracts2.put("de", "abstract de 2");
+		langAbstracts2.put("en", "abstract en 2");
+		
+		Standard norm1 = new Standard();
+		norm1.setName("std-1");
+		norm1.setInstitution("DIN");
+		norm1.setReleased("2016-11-00");
+		norm1.setTitles(langTitles1);		
+		norm1.setAbstracts(langAbstracts1);
+		this.repository.saveAndFlush(norm1);
+		
+		Standard norm2 = new Standard();
+		norm2.setName("std-2");
+		norm2.setInstitution("DIN");
+		norm2.setReleased("2015-11-00");
+		norm2.setTitles(langTitles2);
+		norm2.setAbstracts(langAbstracts2);
+		this.repository.saveAndFlush(norm2);
+		 
 
 		Iterable<Standard> elements = repository.findAll();
 		elements.forEach(System.out::println);			
