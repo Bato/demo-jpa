@@ -45,12 +45,18 @@ The following configuration enables the h2,mysql,hsql and bar profiles:
 						<profile>postgresql</profile>						
 					</profiles>
 				</configuration>         				
-			</plugin>
-			
+			</plugin>		
 ```
 For more details see [Usage site] (http://docs.spring.io/spring-boot/docs/current/maven-plugin/usage.html)
 
 ## Quick Startup
+
+Git Bash
+```
+cd /D C:/tools/Spring/Boot
+git clone https://github.com/Bato/demo-jpa.git
+```
+
 
 ```
 cd /D D:\tools\Spring\Boot\demo-jpa
